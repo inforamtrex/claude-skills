@@ -607,7 +607,11 @@ ffprobe -version
             <section class="section">
                 <h2><span class="emoji">🍪</span>YouTube и куки</h2>
 
-                <p><strong>Если скачиваешь видео с YouTube, нужны куки.</strong> Они позволяют скачивать видео, защищённые геолокацией или возрастом.</p>
+                <div style="background: var(--bg-light); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--warning);">
+                    <strong style="color: var(--primary);">ШАГ 1 перед дубляжом:</strong> скачиваем видео с YouTube через скилл <code>/download</code>. Для этого нужны куки. Инструкция ниже.
+                </div>
+
+                <p><strong>Если скачиваешь видео с YouTube, нужны куки.</strong> Они позволяют скачивать видео, защищённые геолокацией или возрастом. После установки расширения куки можно обновлять за 10 секунд.</p>
 
                 <h3>Шаг 1: Установить расширение в Chrome</h3>
                 <ol style="margin-left: 20px; color: var(--text-dark);">
@@ -684,6 +688,15 @@ yt-dlp --cookies cookies.txt "https://www.youtube.com/watch?v=dQw4w9WgXcQ" -o "v
                             <td>Обнови куки (сделай экспорт заново) — YouTube может их инвалидировать</td>
                         </tr>
                     </table>
+                </div>
+
+                <div style="background: var(--bg-light); padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid var(--success);">
+                    <strong style="color: var(--success);">✓ Куки готовы!</strong><br>
+                    Теперь можешь:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Скачать видео: <code>/download "https://youtube.com/watch?v=..."</code></li>
+                        <li>Запустить полный гайд дубляжа: <code>/dub-guide</code></li>
+                    </ul>
                 </div>
             </section>
 
