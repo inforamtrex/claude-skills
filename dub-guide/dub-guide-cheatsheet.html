@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Памятка: Кастомный скилл /dub-guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e66502;
+            --primary-dark: #b8501f;
+            --success: #00bd29;
+            --warning: #e9d902;
+            --danger: #e66502;
+            --bg-light: #faf8f5;
+            --bg-white: #ffffff;
+            --text-dark: #1b0900;
+            --text-light: #5a3a25;
+            --border: #e1c8b0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-light: #2a1f1a;
+                --bg-white: #1a1410;
+                --text-dark: #fae1c8;
+                --text-light: #e9d902;
+                --border: #4a3728;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #e66502 0%, #b8501f 100%);
+            color: #fae1c8;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .section h3 {
+            font-size: 1.3em;
+            color: var(--primary);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .structure {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .structure code {
+            color: var(--primary);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th {
+            background: var(--primary);
+            color: #fae1c8;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        .file-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .file-name {
+            font-family: monospace;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.05em;
+        }
+
+        .file-size {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .file-desc {
+            margin-top: 10px;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .step-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .step-item {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .badge-manual {
+            background: #fef3e2;
+            color: #b8501f;
+        }
+
+        .badge-auto {
+            background: #c8f7d0;
+            color: #005a11;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .link-card {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(230, 101, 2, 0.15);
+        }
+
+        .link-card-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .link-card-desc {
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+
+        .quick-start {
+            background: linear-gradient(135deg, #fef3e2 0%, #fae1c8 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .quick-start h4 {
+            color: #b8501f;
+            margin-bottom: 10px;
+        }
+
+        .quick-start code {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #b8501f;
+        }
+
+        .check-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .check-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .check-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .version-info {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-top: 2px solid var(--border);
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
+
+        .path-badge {
+            background: #ffe8d1;
+            color: #b8501f;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-family: monospace;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .quick-start {
+                background: linear-gradient(135deg, #3e2723 0%, #4a3728 100%);
+            }
+
+            .quick-start h4 {
+                color: #fae1c8;
+            }
+
+            .quick-start code {
+                background: rgba(0, 0, 0, 0.3);
+                color: #e9d902;
+            }
+
+            .path-badge {
+                background: #5a4034;
+                color: #fae1c8;
+            }
+        }
+
+        footer {
+            background: var(--bg-light);
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        .emoji {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="emoji">🎬</span>Кастомный скилл /dub-guide</h1>
+            <p class="subtitle">Личная памятка по переозвучиванию видео на другие языки</p>
+        </header>
+
+        <div class="content">
+            <!-- ОБЗОР -->
+            <section class="section">
+                <h2><span class="emoji">📋</span>Обзор</h2>
+                <p>Кастомный скилл для интерактивного пошагового переозвучивания видео с использованием бесплатных голосов.</p>
+
+                <div class="quick-start">
+                    <h4>⚡ Быстрый старт</h4>
+                    <p>Просто напиши в Claude Code:</p>
+                    <code>/dub-guide</code>
+                    <p style="margin-top: 10px; font-size: 0.9em;">И следуй 11 шагам переозвучивания видео</p>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Название</strong></td>
+                            <td>/dub-guide</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GitHub репо</strong></td>
+                            <td>inforamtrex/claude-skills (публичный)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Локально установлен</strong></td>
+                            <td><span class="path-badge">C:\Users\user\.claude\skills\dub-guide\</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Версия</strong></td>
+                            <td>v1.0 (2026-08-15)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Языки</strong></td>
+                            <td>40+ (RU, FR, ZH, EN и другие)</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- СТРУКТУРА -->
+            <section class="section">
+                <h2><span class="emoji">🗂️</span>Структура скилла</h2>
+
+                <div class="structure">
+inforamtrex/claude-skills/<br>
+├── README.md                         (инструкции установки)<br>
+├── .gitignore                        (исключения для git)<br>
+└── <strong>dub-guide/</strong><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <strong>SKILL.md</strong>               (главный файл, 784 строк)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── <strong>reference/</strong><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── voices.md           (голоса и коды)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── requirements.md    (зависимости)
+                </div>
+
+                <h3>Файлы внутри</h3>
+
+                <div class="file-card">
+                    <div class="file-name">📄 SKILL.md</div>
+                    <div class="file-size">13.8 КБ • 784 строк</div>
+                    <div class="file-desc">
+                        <strong>Главный файл скилла.</strong> Содержит:
+                        <ul class="check-list">
+                            <li>Полное описание всех 11 шагов</li>
+                            <li>Шаги 1-5 (подготовка): видео, транскрипт, перевод, бренды, голос</li>
+                            <li>Шаги 6-10 (автоматика): озвучка, подгон темпа, отделение музыки, сведение, субтитры</li>
+                            <li>Шаг 11 (проверка): финальная проверка результата</li>
+                            <li>Примеры команд и кода</li>
+                            <li>Таблица "Частые грабли" с решениями</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="file-card">
+                    <div class="file-name">🎤 reference/voices.md</div>
+                    <div class="file-size">3.4 КБ</div>
+                    <div class="file-desc">
+                        <strong>Справочник голосов.</strong> Содержит:
+                        <ul class="check-list">
+                            <li>Таблица голосов для 40+ языков</li>
+                            <li>Языки: Russian (RU), French (FR), Chinese (ZH), English (EN), и другие</li>
+                            <li>Коды голосов (нейронные): ru-RU-DmitryNeural, ru-RU-SvetlanaNeural и т.п.</li>
+                            <li>Качество звучания для каждого языка</li>
+                            <li>Советы по выбору голоса (мужской/женский)</li>
+                            <li>Команда для поиска всех голосов</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="file-card">
+                    <div class="file-name">⚙️ reference/requirements.md</div>
+                    <div class="file-size">6.5 КБ</div>
+                    <div class="file-desc">
+                        <strong>Требования и диагностика.</strong> Содержит:
+                        <ul class="check-list">
+                            <li>Поддержка ОС (Windows, macOS, Linux)</li>
+                            <li>Системные требования (ОЗУ, диск, интернет)</li>
+                            <li>Серверные ограничения (Linux без видеокарты)</li>
+                            <li>Зависимости Python (edge-tts, demucs, torch, ffmpeg)</li>
+                            <li>Требования к шрифтам (для CJK)</li>
+                            <li>Настройка видеокарты (NVIDIA, AMD, Apple Silicon)</li>
+                            <li>Скрипт check_env.py для проверки окружения</li>
+                            <li>Таблица решения частых ошибок</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11 ШАГОВ -->
+            <section class="section">
+                <h2><span class="emoji">📈</span>11 шагов переозвучивания</h2>
+
+                <h3>Ручные шаги (1-5) — твоя работа</h3>
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <strong>Получить видео</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Скачай или используй готовый файл MP4/MKV</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <strong>Транскрипт оригинала</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Текст всех диалогов (вручную или Whisper)</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <strong>Перевод</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Переведи транскрипт на целевой язык</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">4</div>
+                        <strong>Работа с брендами</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Фонетическая озвучка (Bix → Бикс)</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">5</div>
+                        <strong>Выбор голоса</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Выбери язык и мужской/женский голос</span>
+                    </div>
+                </div>
+
+                <h3>Автоматические шаги (6-10) — скилл /dub делает сам</h3>
+                <div class="step-list">
+                    <div class="step-item">
+                        <div class="step-num">6</div>
+                        <strong>Синтез речи (TTS)</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">edge-tts генерирует озвучку</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">7</div>
+                        <strong>Подгон темпа (ATEMPO)</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Озвучка растягивается/сжимается под видео</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">8</div>
+                        <strong>Отделение музыки</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">demucs отделяет голос от музыки</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">9</div>
+                        <strong>Сведение (микс)</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Озвучка + музыка = финальный трек</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">10</div>
+                        <strong>Субтитры</strong><br>
+                        <span style="color: var(--text-light); font-size: 0.9em;">Синхронизированные субтитры (VTT/SRT)</span>
+                    </div>
+                </div>
+
+                <h3>Финальная проверка (11) — твоя работа</h3>
+                <div class="step-item" style="grid-column: 1 / -1;">
+                    <div class="step-num">11</div>
+                    <strong>Проверка результата</strong><br>
+                    <span style="color: var(--text-light); font-size: 0.9em;">Смотри видео, проверяй озвучку, субтитры, синхронизацию</span>
+                </div>
+            </section>
+
+            <!-- ЗАВИСИМОСТИ -->
+            <section class="section">
+                <h2><span class="emoji">📦</span>Зависимости и установка</h2>
+
+                <h3>Минимальная установка</h3>
+                <div class="structure">
+pip install edge-tts demucs torch torchaudio
+                </div>
+
+                <h3>Чек окружения</h3>
+                <div class="structure">
+python -m edge_tts --help<br>
+python -m demucs --help<br>
+ffmpeg -version<br>
+ffprobe -version
+                </div>
+
+                <h3>Что нужно</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Пакет</th>
+                            <th>Размер</th>
+                            <th>Назначение</th>
+                        </tr>
+                        <tr>
+                            <td><strong>edge-tts</strong></td>
+                            <td>~10 МБ</td>
+                            <td>Синтез речи (40+ голосов)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>demucs</strong></td>
+                            <td>~1 ГБ</td>
+                            <td>Отделение голоса от музыки</td>
+                        </tr>
+                        <tr>
+                            <td><strong>torch</strong></td>
+                            <td>~500 МБ (CPU) или +500 МБ (GPU)</td>
+                            <td>Нейросетевой фреймворк</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ffmpeg</strong></td>
+                            <td>~50 МБ</td>
+                            <td>Обработка видео/аудио</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Требования к ОЗУ</h3>
+                <ul class="check-list">
+                    <li><strong>4 ГБ:</strong> для коротких видео (до 5 минут)</li>
+                    <li><strong>8+ ГБ:</strong> для видео от 5 до 30 минут</li>
+                    <li><strong>Видео > 30 минут:</strong> раздели на куски</li>
+                </ul>
+            </section>
+
+            <!-- БЫСТРАЯ ССЫЛКА -->
+            <section class="section">
+                <h2><span class="emoji">🔗</span>Быстрая ссылка</h2>
+
+                <div class="links-grid">
+                    <div class="link-card">
+                        <div class="link-card-title">GitHub репо</div>
+                        <div class="link-card-desc">https://github.com/inforamtrex/claude-skills</div>
+                    </div>
+                    <div class="link-card">
+                        <div class="link-card-title">Локальная установка</div>
+                        <div class="link-card-desc">C:\Users\user\.claude\skills\dub-guide\</div>
+                    </div>
+                    <div class="link-card">
+                        <div class="link-card-title">Памятка про алгоритм</div>
+                        <div class="link-card-desc">C:\Users\user\.claude\memory\skill-dub-algorithm.md</div>
+                    </div>
+                    <div class="link-card">
+                        <div class="link-card-title">Дневник сессии</div>
+                        <div class="link-card-desc">C:\Users\user\.claude\memory\2026-08-15.md</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- YOUTUBE И КУКИ -->
+            <section class="section">
+                <h2><span class="emoji">🍪</span>YouTube и куки</h2>
+
+                <p><strong>Если скачиваешь видео с YouTube, нужны куки.</strong> Они позволяют скачивать видео, защищённые геолокацией или возрастом.</p>
+
+                <h3>Шаг 1: Установить расширение в Chrome</h3>
+                <ol style="margin-left: 20px; color: var(--text-dark);">
+                    <li>Открыть Chrome Web Store: <code>https://chrome.google.com/webstore</code></li>
+                    <li>Искать: <strong>"Get cookies.txt"</strong></li>
+                    <li>Найти расширение от <strong>Erick Veil</strong> (иконка жёлтая с печеньем)</li>
+                    <li>Нажать <strong>"Добавить в Chrome"</strong></li>
+                    <li>Подтвердить разрешения</li>
+                </ol>
+
+                <h3>Шаг 2: Вытащить куки с YouTube</h3>
+                <div style="background: var(--bg-light); padding: 20px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--primary);">
+                    <strong style="color: var(--primary);">Важно:</strong> делай это в браузере, где ты залогинен на YouTube!
+                </div>
+
+                <ol style="margin-left: 20px; color: var(--text-dark);">
+                    <li><strong>Откройте YouTube</strong> — зайдите на любую страницу YouTube (например, youtube.com)</li>
+                    <li><strong>Нажмите на иконку расширения</strong> — в правом верхнем углу браузера (рядом с адресной строкой)</li>
+                    <li><strong>Найдите "Get cookies.txt for …"</strong> — это наше расширение</li>
+                    <li><strong>Нажмите кнопку "Export"</strong> (зелёная кнопка) — куки скопируются в буфер обмена</li>
+                </ol>
+
+                <h3>Шаг 3: Сохранить куки в файл</h3>
+                <ol style="margin-left: 20px; color: var(--text-dark);">
+                    <li><strong>Откройте любой текстовый редактор</strong> (Notepad, VS Code, etc.)</li>
+                    <li><strong>Вставьте куки</strong> — Ctrl+V</li>
+                    <li><strong>Сохраните файл с именем:</strong> <span class="path-badge">cookies.txt</span></li>
+                    <li><strong>Сохраните в рабочую папку</strong>, например: <span class="path-badge">C:\Users\user\Downloads\cookies.txt</span></li>
+                </ol>
+
+                <div style="background: var(--bg-light); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--success);">
+                    <strong style="color: var(--success);">✓ Правильно:</strong><br>
+                    <code>cookies.txt</code> (не .doc, не .rtf, ТОЛЬКО .txt)<br>
+                    Содержимое: таблица с колонками (domain, path, secure, expiry, name, value)
+                </div>
+
+                <h3>Шаг 4: Скачать видео с YouTube через yt-dlp</h3>
+                <div class="structure">
+yt-dlp --cookies cookies.txt "https://www.youtube.com/watch?v=dQw4w9WgXcQ" -o "video.mp4"
+                </div>
+
+                <p style="color: var(--text-light); margin-top: 15px; font-size: 0.95em;">
+                    <strong>Флаг <code>--cookies cookies.txt</code></strong> указывает, какой файл с куками использовать. Если yt-dlp и cookies.txt в разных папках, указывай полный путь: <code>--cookies "C:\Users\user\Downloads\cookies.txt"</code>
+                </p>
+
+                <h3>Когда обновлять куки?</h3>
+                <ul class="check-list">
+                    <li>Куки живут несколько месяцев (зависит от YouTube)</li>
+                    <li>Если yt-dlp выдаст ошибку 403 (доступ запрещён) — обнови куки</li>
+                    <li>Если выходишь из YouTube-аккаунта — куки больше не работают</li>
+                </ul>
+
+                <h3>Частые грабли</h3>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Проблема</th>
+                            <th>Решение</th>
+                        </tr>
+                        <tr>
+                            <td>«Файл не найден» при yt-dlp</td>
+                            <td>Проверь путь к cookies.txt — используй полный путь или скачивай в ту же папку, что yt-dlp</td>
+                        </tr>
+                        <tr>
+                            <td>Расширение не появилось в Chrome</td>
+                            <td>Перезагрузи браузер (Ctrl+Shift+Delete или перезапуск)</td>
+                        </tr>
+                        <tr>
+                            <td>Экспорт пустой (ничего не скопировалось)</td>
+                            <td>Убедись, что ты на YouTube.com, а не на другом сайте</td>
+                        </tr>
+                        <tr>
+                            <td>yt-dlp выдаёт 403 даже с куками</td>
+                            <td>Обнови куки (сделай экспорт заново) — YouTube может их инвалидировать</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- КОМАНДНАЯ СПРАВКА -->
+            <section class="section">
+                <h2><span class="emoji">⚡</span>Командная справка</h2>
+
+                <h3>Запуск скилла</h3>
+                <div class="structure">
+/dub-guide
+                </div>
+
+                <h3>Проверить окружение</h3>
+                <div class="structure">
+python check_env.py
+                </div>
+
+                <h3>Найти все голоса для русского</h3>
+                <div class="structure">
+python -m edge_tts --list-voices | grep -i "ru-"
+                </div>
+
+                <h3>Тестировать голос</h3>
+                <div class="structure">
+edge-tts --voice "ru-RU-DmitryNeural" --text "Привет мир" --write-media output.mp3
+                </div>
+
+                <h3>Отделить музыку в видео</h3>
+                <div class="structure">
+python -m demucs video.mp4 -n mdx_extra
+                </div>
+
+                <h3>Синхронизировать субтитры (ffmpeg)</h3>
+                <div class="structure">
+ffmpeg -i video.mp4 -i audio_ru.mp3 -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 output.mp4
+                </div>
+            </section>
+
+            <!-- ЧАСТЫЕ ПРОБЛЕМЫ -->
+            <section class="section">
+                <h2><span class="emoji">🐛</span>Частые проблемы</h2>
+
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Проблема</th>
+                            <th>Решение</th>
+                        </tr>
+                        <tr>
+                            <td>TTS неправильно произносит бренд</td>
+                            <td>Добавь фонетику на шаге 4 (Bix → Бикс)</td>
+                        </tr>
+                        <tr>
+                            <td>Озвучка не уложилась в видео</td>
+                            <td>Сократи перевод (шаг 3) или подними ATEMPO (шаг 7)</td>
+                        </tr>
+                        <tr>
+                            <td>Голос тихий под музикой</td>
+                            <td>Подстрой volume= в параметрах шага 9</td>
+                        </tr>
+                        <tr>
+                            <td>На сервере процесс упал</td>
+                            <td>Видео слишком длинное — раздели на куски по 5 минут</td>
+                        </tr>
+                        <tr>
+                            <td>ffmpeg not found</td>
+                            <td>Переустанови: `winget install ffmpeg` (Windows)</td>
+                        </tr>
+                        <tr>
+                            <td>ModuleNotFoundError: edge_tts</td>
+                            <td>`pip install edge-tts` (или не установлен вообще)</td>
+                        </tr>
+                        <tr>
+                            <td>Субтитры не видны</td>
+                            <td>Проверь кодировку (UTF-8) и шрифт (Arial для кириллицы)</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- УСТАНОВКА -->
+            <section class="section">
+                <h2><span class="emoji">📥</span>Установка</h2>
+
+                <h3>Способ 1: Через маркетплейс Claude Code (рекомендуется)</h3>
+                <ul class="check-list">
+                    <li>Откройте Claude Code</li>
+                    <li>Меню → Settings → Marketplace → Discover Skills</li>
+                    <li>Поиск: <code>inforamtrex/dub-guide</code></li>
+                    <li>Нажмите Install</li>
+                    <li>Перезагрузите Claude Code</li>
+                </ul>
+
+                <h3>Способ 2: Локальная копия (уже сделано)</h3>
+                <p>Скилл уже установлен в:</p>
+                <div class="structure">
+C:\Users\user\.claude\skills\dub-guide\
+                </div>
+                <p style="margin-top: 10px; color: var(--text-light);">Просто перезагрузи Claude Code, и скилл появится в списке.</p>
+            </section>
+
+            <!-- ИЗВЕСТНЫЕ ОГРАНИЧЕНИЯ -->
+            <section class="section">
+                <h2><span class="emoji">⚠️</span>Известные ограничения</h2>
+
+                <ul class="check-list">
+                    <li><strong>Без липсинка:</strong> субтитры синхронизированы, но губы не меняются</li>
+                    <li><strong>Только звук и субтитры:</strong> видеоряд не редактируется</li>
+                    <li><strong>Серверные ограничения:</strong> Linux без видеокарты может упасть на видео > 30 минут</li>
+                    <li><strong>CJK-шрифты на сервере:</strong> китайские субтитры собирай на Windows/macOS</li>
+                    <li><strong>Первый запуск slow:</strong> скачивается модель demucs (~1 ГБ)</li>
+                </ul>
+
+                <h3>Решение для больших видео</h3>
+                <p>Раздели видео на части по 5 минут, обработай отдельно, потом склей:</p>
+                <div class="structure">
+# Разрезать<br>
+ffmpeg -i video.mp4 -c copy -segment_time 300 part_%03d.mp4<br>
+<br>
+# Обработать каждый part_*.mp4<br>
+/dub-guide<br>
+<br>
+# Склеить<br>
+ffmpeg -f concat -safe 0 -i list.txt -c copy output.mp4
+                </div>
+            </section>
+
+            <!-- ВЕРСИЯ И КОНТАКТЫ -->
+            <section class="section">
+                <h2><span class="emoji">📝</span>Версия и контакты</h2>
+
+                <div class="version-info">
+                    <p><strong>Версия:</strong> v1.0 (2026-08-15)</p>
+                    <p><strong>Автор:</strong> Miriam Rempel (Ольга Каурова)</p>
+                    <p><strong>Email:</strong> info.ramtrex@gmail.com</p>
+                    <p><strong>Лицензия:</strong> MIT — используйте как хотите</p>
+                    <p style="margin-top: 15px; font-style: italic;">Нашли баг или хотите улучшить? Issues и Pull Requests приветствуются в GitHub репо.</p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>🎬 Личная памятка: Кастомный скилл /dub-guide • Создано 2026-08-15</p>
+            <p>GitHub: <strong>inforamtrex/claude-skills</strong> • Локально: <strong>C:\Users\user\.claude\skills\dub-guide\</strong></p>
+        </footer>
+    </div>
+</body>
+</html>
